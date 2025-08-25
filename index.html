@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LeetCode Companywise Interview Questions</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2em; background: #fafafa; }
+    .company { margin-bottom: 2em; border-bottom: 1px solid #ccc; padding-bottom: 1em; }
+    .question { margin-left: 1em; margin-bottom: 1em; background: #fff; border-radius: 4px; padding: 1em; box-shadow: 0 1px 2px #eee;}
+    h2 { color: #0074d9; }
+    pre { white-space: pre-wrap; word-break: break-word; background: #f5f5f5; padding: 0.5em; border-radius: 3px;}
+  </style>
+</head>
+<body>
+  <h1>LeetCode Companywise Interview Questions</h1>
+  <div id="content">Loading...</div>
+  <script>
+    fetch("questions.json")
+      .then(r => r.json())
+      .then(data => {
+        const content = document.getElementById("content");
+        content.innerHTML = "";
+        Object.keys(data).forEach(company => {
+          const companyDiv = document.createElement("div");
+          companyDiv.className = "company";
+          companyDiv.innerHTML = `<h2>${company}</h2>`;
+          data[company].forEach(q => {
+            const qDiv = document.createElement("div");
+            qDiv.className = "question";
+            qDiv.innerHTML = `<strong>${q.file}</strong><pre>${q.content}</pre>`;
+            companyDiv.appendChild(qDiv);
+          });
+          content.appendChild(companyDiv);
+        });
+      });
+  </script>
+</body>
+</html>
